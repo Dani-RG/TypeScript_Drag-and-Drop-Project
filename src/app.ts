@@ -30,7 +30,7 @@ class Project {
 type Listener<T> = (items: T[]) => void;
 
 class State<T> {
-  protected listeners: Listener<T>[] = []; //change private to the similar protected because it allows access from inheritance classes
+  protected listeners: Listener<T>[] = [];
 
   addListener(listenerFn: Listener<T>) {
     this.listeners.push(listenerFn);
@@ -85,7 +85,7 @@ const projectState = ProjectState.getInstance();
 //VALIDATION:
 interface Validatable {
   value: string | number;
-  required?: boolean; // the ? sets it can also be an undefined
+  required?: boolean;
   minLength?: number;
   maxLength?: number;
   min?: number;
@@ -131,9 +131,6 @@ function validate(validatableInput: Validatable) {
 function autoBind(
   _: any,
   _2: string,
-  // ORIGINAL FIRST TWO PARAMETERS THAT WILL NOT BEING USED
-  // target: any,
-  // methodName: string,
   descriptor: PropertyDescriptor
 ) {
   const originalMethod = descriptor.value;
@@ -149,7 +146,6 @@ function autoBind(
 
 //COMPONENT BASE CLASS:
 abstract class Component<T extends HTMLElement, U extends HTMLElement> {
-  // abstract keyword makes this class can only be used for inheritance and never be instantiated
   templateElement: HTMLTemplateElement;
   hostElement: T;
   element: U;
@@ -162,7 +158,7 @@ abstract class Component<T extends HTMLElement, U extends HTMLElement> {
   ) {
     this.templateElement = document.getElementById(
       templateId
-    )! as HTMLTemplateElement; //the ! tell typescript that it will not throw a null because we know that in the html we will have that element
+    )! as HTMLTemplateElement;
     this.hostElement = document.getElementById(hostElementId)! as T;
 
     const importedNode = document.importNode(
@@ -241,7 +237,7 @@ class ProjectList
   assignedProjects: Project[];
 
   constructor(private type: "active" | "finished") {
-    super("project-list", "app", false, `${type}-projects`); //remove this. in type, because this. can't be used before super finish running
+    super("project-list", "app", false, `${type}-projects`);
     this.assignedProjects = [];
 
     this.configure();
@@ -251,7 +247,7 @@ class ProjectList
   @autoBind
   dragOverHandler(event: DragEvent) {
     if (event.dataTransfer && event.dataTransfer.types[0] === "text/plain") {
-      event.preventDefault(); // the default behavior is to not allow dropping
+      event.preventDefault();
       const listEl = this.element.querySelector("ul")!;
       listEl.classList.add("droppable");
     }
@@ -290,7 +286,6 @@ class ProjectList
   }
 
   renderContent() {
-    //remove private keyword because abstract methods don't support to be private
     const listId = `${this.type}-projects-list`;
     this.element.querySelector("ul")!.id = listId;
     this.element.querySelector("h2")!.textContent =
@@ -331,8 +326,6 @@ class ProjectInput extends Component<HTMLDivElement, HTMLFormElement> {
 
   configure() {
     this.element.addEventListener("submit", this.submitHandler);
-    //WITHOUT AUTOBIND DECORATOR:
-    // this.element.addEventListener('submit', this.submitHandler.bind(this));
   }
 
   renderContent() {}
@@ -367,7 +360,6 @@ class ProjectInput extends Component<HTMLDivElement, HTMLFormElement> {
       return;
     } else {
       return [enteredTitle, enteredDescription, +enteredPeople];
-      // the + converts the string received by default by the form, into a number
     }
   }
 
