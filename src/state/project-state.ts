@@ -1,5 +1,5 @@
-import { Project, ProjectStatus } from "../models/project.js";
-// .js because we need to import them as if they were already compiled
+import { Project, ProjectStatus } from "../models/project";
+// remove the .js extension, for webpack to work
 
 // Project State Management
 type Listener<T> = (items: T[]) => void;

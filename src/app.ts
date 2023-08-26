@@ -1,6 +1,6 @@
-import { ProjectInput } from "./components/project-input.js";
-import { ProjectList } from "./components/project-list.js";
-// .js because we need to import them as if they were already compiled
+import { ProjectInput } from "./components/project-input";
+import { ProjectList } from "./components/project-list";
+// remove the .js extension, for webpack to work
 
 new ProjectInput();
 new ProjectList("active");

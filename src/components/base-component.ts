@@ -1,7 +1,5 @@
 // Component Base Class
 
-export const something = "..."; // for example purpose
-// we can have only one export default per file, that way we can import it without its true name
 export default abstract class Component<T extends HTMLElement, U extends HTMLElement> {
   templateElement: HTMLTemplateElement;
   hostElement: T;

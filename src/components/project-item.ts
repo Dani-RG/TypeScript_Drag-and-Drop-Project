@@ -1,8 +1,8 @@
-import { Draggable } from "../models/drag-drop.js";
-import { Project } from "../models/project.js";
-import Component from "./base-component.js"; // importing it with the name we want to have here, because it was a default export, no need to have the {} of a "named import"
-import { autobind } from "../decorators/autobind.js";
-// .js because we need to import them as if they were already compiled
+import { Draggable } from "../models/drag-drop";
+import { Project } from "../models/project";
+import Component from "./base-component";
+import { autobind } from "../decorators/autobind";
+// remove the .js extension, for webpack to work
 
 // ProjectItem Class
 export class ProjectItem
