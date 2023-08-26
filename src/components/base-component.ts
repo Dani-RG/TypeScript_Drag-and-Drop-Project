@@ -1,8 +1,6 @@
+// Component Base Class
 namespace App {
-  export abstract class Component<
-    T extends HTMLElement,
-    U extends HTMLElement
-  > {
+  export abstract class Component<T extends HTMLElement, U extends HTMLElement> {
     templateElement: HTMLTemplateElement;
     hostElement: T;
     element: U;
@@ -32,7 +30,7 @@ namespace App {
 
     private attach(insertAtBeginning: boolean) {
       this.hostElement.insertAdjacentElement(
-        insertAtBeginning ? "afterbegin" : "beforeend",
+        insertAtBeginning ? 'afterbegin' : 'beforeend',
         this.element
       );
     }
